@@ -44,7 +44,7 @@ The application will be available at http://localhost:3000.
 + .env is commented to not diclose a sensitive information such as API Key, to use the APP copypaste an API Key from
 + https://home.openweathermap.org/
 
-## Installation
+## Usage
   Changing City: Use the sidebar to enter and select a city to view its weather forecast.
 
   Language Toggle: Click the language toggle button to switch between available languages.
