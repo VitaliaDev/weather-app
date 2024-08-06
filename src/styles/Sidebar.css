@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Sidebar */
+.sidebar {
+  width: 150px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.419);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: width 0.3s ease;
+  z-index: 1000;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Styles for the minimized sidebar */
+.sidebar.minimized {
+  width: 60px;
+  padding: 10px;
+}
+
+/* Style for the minimize/maximize button */
+.minimize-button {
+  position: absolute;
+  top: 10px;
+  right: -20px;
+  background: #294691;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Style for the elements inside the sidebar */
+.sidebar-content {
+  display: block;
+}
+
+/* Hide the sidebar content when minimized */
+.sidebar.minimized .sidebar-content {
+  display: none;
+}
+
+/* Style for the icons inside the sidebar */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sidebar-item .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Dropdown container */
+.dropdown-container {
+  position: relative;
+}
+
+/* Style for the dropdown text and icon */
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  color: #294691;
+}
+
+/* Style for the city dropdown menu */
+.city-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #294691;
+}
+
+.city-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 15px;
+}
+
+.city-item:hover {
+  background-color: #294691;
+  color: aliceblue;
+}
+
+.city-item.selected {
+  background-color: #294691;
+  color: aliceblue; /* Background color for the selected item */
+}
+
+/* Style for the arrow icon */
+.arrow-icon {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Downward arrow rotated when the dropdown is open */
+.arrow-open {
+  transform: rotate(180deg);
+}
+
+/* Style for minimized mode icons */
+.icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon-minimized {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+}

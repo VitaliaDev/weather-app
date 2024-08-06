@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Container for the weather display */
+.container {
+  position: relative;
+  padding: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Main weather card */
+.mainCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.419);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* Title for the weather display */
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  color: #294691;
+  margin: 20px 0;
+}
+
+/* Temperature display */
+.temp {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0 20px 0 0;
+  color: #294691;
+}
+
+/* Main card information */
+.mainCardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Weather details container */
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  gap: 10px;
+}
+
+/* Weather icon */
+.img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background-color: #294691;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+/* Weather description text */
+.textDescription {
+  margin: 0;
+  font-size: 25px;
+  color: #294691;
+  font-weight: bold;
+}
+
+/* General text style */
+.text {
+  margin: 0;
+  font-size: 16px;
+  color: #294691;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Detail card icon */
+.detailIcon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* Detail card text */
+.detailText {
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+  color: #294691;
+}
+
+/* Detail card container */
+.detailCard {
+  margin: 10px;
+  padding: 20px;
+  flex: 1 0 21%;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.419);
+  border-radius: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s ease-in-out 0.1s;
+  transform-style: preserve-3d;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Cloud icon styles */
+.cloudIcon {
+  font-size: 250px;
+  color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 10%;
+  left: -20%;
+  z-index: 0;
+}
+
+.cloudIcon2 {
+  font-size: 250px;
+  color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 60%;
+  right: -20%;
+  z-index: 0;
+}
+
+/* Cloud background */
+.cloudBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Animations */
+
+/* Rotation animation */
+.rotateIcon {
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Up and down movement animation */
+.moveUpDownIcon {
+  animation: moveUpDown 2s ease-in-out infinite;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Vibrate animation */
+.vibrateIcon {
+  animation: vibrate 2s ease-in-out infinite;
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Fade in and out animation */
+.fadeInOutIcon {
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
