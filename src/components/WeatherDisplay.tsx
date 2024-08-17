@@ -8,26 +8,58 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import '../styles/WeatherDisplay.css';
 
-// A Weather Display component that shows the current weather information for a specified city.
-const WeatherDisplay = ({ city, language }) => {
+// Define los tipos para los datos del clima
+interface WeatherData {
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  weather: {
+    description: string;
+    icon: string;
+  }[];
+  visibility: number;
+  sys: {
+    sunrise: number;
+    sunset: number;
+  };
+  clouds: {
+    all: number;
+  };
+}
+
+// Define las props del componente
+interface WeatherDisplayProps {
+  city: string;
+  language: string;
+}
+
+const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
   const { t } = useTranslation();
-  const [weatherData, setWeatherData] = useState(null); // State to store weather data
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null); // Estado para los datos del clima
+  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
 
-  const [error, setError] = useState(null);// State to handle errors
-
-  // Spring animation for fade-in effect
+  // Animación de fade-in usando react-spring
   const fade = useSpring({ opacity: 1, from: { opacity: 0 }, config: { duration: 1000 } });
 
-  // Fetch weather data whenever city or language changes
+  // Fetch de los datos del clima siempre que cambien la ciudad o el idioma
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY; // Get API key from environment variables
+        const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY; // Obtener la API key desde las variables de entorno
         if (!apiKey) {
           throw new Error("API key is missing");
         }
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=${language}`;
-        const response = await axios.get(url);
+        const response = await axios.get<WeatherData>(url);
         setWeatherData(response.data);
         setError(null);
       } catch (error) {
@@ -47,7 +79,7 @@ const WeatherDisplay = ({ city, language }) => {
     return <div>{t('Loading...')}</div>;
   }
 
-// Destructure weather data for easy access
+  // Desestructuración de los datos del clima para un fácil acceso
   const {
     main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
     wind: { speed, deg },
@@ -57,17 +89,23 @@ const WeatherDisplay = ({ city, language }) => {
     clouds: { all: cloudiness },
   } = weatherData;
 
-   // Capitalize the first letter of a string
-  const capitalizeFirstLetter = (string) => {
+  // Capitalizar la primera letra de una cadena
+  const capitalizeFirstLetter = (string: string): string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-   // Weather description and icon URL
+  // Descripción del clima e icono
   const weatherDescription = capitalizeFirstLetter(weather[0].description);
   const weatherIcon = `http://openweathermap.org/img/wn/${weather[0].icon}.png`;
 
-  // Component to display detailed weather information
-  const DetailCard = ({ icon: Icon, label, value, iconColor, animationClass }) => {
+  // Componente para mostrar información detallada del clima
+  const DetailCard: React.FC<{
+    icon: React.ElementType;
+    label: string;
+    value: string;
+    iconColor: string;
+    animationClass: string;
+  }> = ({ icon: Icon, label, value, iconColor, animationClass }) => {
     return (
       <motion.div
         className="detailCard"
@@ -75,7 +113,7 @@ const WeatherDisplay = ({ city, language }) => {
         whileTap={{ scale: 0.9 }}
       >
         <motion.div
-         className={animationClass}
+          className={animationClass}
           style={{ color: iconColor }}
         >
           <Icon className="detailIcon" />
@@ -86,8 +124,8 @@ const WeatherDisplay = ({ city, language }) => {
     );
   };
 
-  // Format timestamp to time string
-  const formatTime = (timestamp) => {
+  // Formatear la hora desde el timestamp
+  const formatTime = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };

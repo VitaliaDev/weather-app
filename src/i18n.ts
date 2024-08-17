@@ -3,13 +3,9 @@ import { initReactI18next } from 'react-i18next';
 
 // Initialize i18n with React integration
 i18n
-  // Use the React i18next module
-  .use(initReactI18next)
-  // Configure i18n
+  .use(initReactI18next) // Use the React i18next module
   .init({
-    // Define translation resources for different languages
     resources: {
-      // English translations
       en: {
         translation: {
           "Cities": "Cities",
@@ -59,7 +55,6 @@ i18n
           "Loading...": "Loading..."
         }
       },
-      // Spanish translations
       es: {
         translation: {
           "Cities": "Ciudades",
@@ -110,11 +105,8 @@ i18n
         }
       }
     },
-    // Default language
-    lng: "en", 
-    // Fallback language in case the specified language is not available
-    fallbackLng: "en",
-    // Configure interpolation settings
+    lng: "en", // Default language
+    fallbackLng: "en", // Fallback language
     interpolation: {
       escapeValue: false // React already escapes values to prevent XSS attacks
     }

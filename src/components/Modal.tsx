@@ -1,22 +1,46 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import '../styles/Modal.css'; 
+import '../styles/Modal.css';
 
-//Modal to fill a user contact form
-const Modal = ({ show, handleClose }) => {
+// Definimos las props del componente Modal
+interface ModalProps {
+  show: boolean;
+  handleClose: () => void;
+}
+
+// Definimos el tipo de datos del formulario
+interface FormData {
+  name: string;
+  birthdate: string;
+  city: string;
+  email: string;
+  phone: string;
+}
+
+// Definimos el tipo de error de formulario
+interface FormError {
+  name?: string;
+  birthdate?: string;
+  city?: string;
+  email?: string;
+  phone?: string;
+}
+
+// Componente Modal con TypeScript
+const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     birthdate: '',
     city: '',
     email: '',
     phone: ''
   });
-  const [formError, setFormError] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
-  const [isHovered, setHovered] = useState(false);
+  const [formError, setFormError] = useState<FormError>({});
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [isHovered, setHovered] = useState<boolean>(false);
 
-  // Clear form data and messages when closing the modal
+  // Limpiar los datos del formulario y los mensajes cuando se cierra el modal
   const handleModalClose = () => {
     setFormData({
       name: '',
@@ -30,7 +54,7 @@ const Modal = ({ show, handleClose }) => {
     handleClose();
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevFormData => ({
       ...prevFormData,
@@ -38,9 +62,9 @@ const Modal = ({ show, handleClose }) => {
     }));
   };
 
-  const validateForm = () => {
+  const validateForm = (): FormError => {
     const { name, birthdate, city, email, phone } = formData;
-    let errors = {};
+    let errors: FormError = {};
 
     if (!name) errors.name = t('Name is required');
     if (name && /\d/.test(name)) errors.name = t('Name cannot contain numbers');
@@ -60,23 +84,23 @@ const Modal = ({ show, handleClose }) => {
     return errors;
   };
 
-  const isFormValid = () => {
+  const isFormValid = (): boolean => {
     return Object.keys(validateForm()).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevenir el envío por defecto del formulario
 
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
-      setFormError(errors); // Set errors
+      setFormError(errors); // Establecer errores
       setSuccessMessage('');
     } else {
       setSuccessMessage(t('Form submitted successfully!'));
       setFormError({});
       setTimeout(() => {
         handleModalClose();
-      }, 2000); // Close modal after 2 seconds
+      }, 2000); // Cerrar modal después de 2 segundos
     }
   };
 

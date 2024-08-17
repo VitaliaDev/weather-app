@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../styles/CityDropdown.css'; 
 
-//A dropdown component that displays cities to choose for user
-const CityDropdown = ({ currentCity, onCityChange }) => {
-  const { t } = useTranslation();
-  const cities = ['London', 'Toronto', 'Singapore'];
-  const [isOpen, setIsOpen] = useState(false);
+// Definir los tipos de las propiedades que el componente va a recibir
+interface CityDropdownProps {
+  currentCity: string;
+  onCityChange: (city: string) => void;
+}
 
-// Function to handle city selection
-  const handleSelectCity = (city) => {
+// Componente CityDropdown tipado con TypeScript
+const CityDropdown: React.FC<CityDropdownProps> = ({ currentCity, onCityChange }) => {
+  const { t } = useTranslation();
+  const cities: string[] = ['London', 'Toronto', 'Singapore'];  // Tipo explícito para el array de ciudades
+  const [isOpen, setIsOpen] = useState<boolean>(false);  // Tipo explícito para el estado booleano
+
+  // Función para manejar la selección de la ciudad
+  const handleSelectCity = (city: string) => {
     onCityChange(city);
   };
 

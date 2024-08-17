@@ -4,32 +4,35 @@ import cityIcon from '../assets/icons/city_icon.png';
 import userIcon from '../assets/icons/user_icon.png';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import Modal from './Modal';
-import '../styles/Sidebar.css'; 
+import '../styles/Sidebar.css';
+// Define the types for the props
+interface SidebarProps {
+  currentCity: string;
+  onCityChange: (city: string) => void;
+  showContactForm: boolean;
+  toggleContactForm: () => void;
+  language: string;
+}
 
-// A sidebar with City dropdow and user form modal
-const Sidebar = ({ onCityChange, showContactForm, toggleContactForm }) => {
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCity, setSelectedCity] = useState(null); // State for selected city
+const Sidebar: React.FC<SidebarProps> = ({
+  currentCity,
+  onCityChange,
+  showContactForm,
+  toggleContactForm,
+  language,
+}) => {
+  const [isMinimized, setIsMinimized] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  const cities = ['London', 'Toronto', 'Singapore'];
+  const cities: string[] = ['London', 'Toronto', 'Singapore'];
 
-  // Toggle sidebar minimized state
   const handleMinimizeToggle = () => {
     setIsMinimized(!isMinimized);
   };
 
-  // Toggle dropdown open state
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  // Handle city selection
-  const handleCitySelect = (city) => {
-    setSelectedCity(city);
-    onCityChange(city);
-    // Do not close the dropdown
   };
 
   return (
@@ -37,6 +40,14 @@ const Sidebar = ({ onCityChange, showContactForm, toggleContactForm }) => {
       <button 
         className="minimize-button" 
         onClick={handleMinimizeToggle}
+        style={{
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          padding: '10px',
+          cursor: 'pointer',
+          transition: 'background-color 0.3s ease'
+        }}
       >
         {isMinimized ? '>' : '<'}
       </button>
@@ -55,8 +66,8 @@ const Sidebar = ({ onCityChange, showContactForm, toggleContactForm }) => {
                 {cities.map((city) => (
                   <li
                     key={city}
-                    onClick={() => handleCitySelect(city)}
-                    className={`city-item ${selectedCity === city ? 'selected' : ''}`} // Conditional class
+                    onClick={() => onCityChange(city)}
+                    className="city-item"
                   >
                     {t(city)}
                   </li>
