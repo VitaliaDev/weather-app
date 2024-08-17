@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../styles/Modal.css';
 
-// Definimos las props del componente Modal
+// Define the props for the Modal component
 interface ModalProps {
-  show: boolean;
-  handleClose: () => void;
+  show: boolean;  // Whether the modal should be visible
+  handleClose: () => void;  // Function to handle closing the modal
 }
 
-// Definimos el tipo de datos del formulario
+// Define the shape of the form data
 interface FormData {
   name: string;
   birthdate: string;
@@ -17,7 +17,7 @@ interface FormData {
   phone: string;
 }
 
-// Definimos el tipo de error de formulario
+// Define the shape of form validation errors
 interface FormError {
   name?: string;
   birthdate?: string;
@@ -26,7 +26,7 @@ interface FormError {
   phone?: string;
 }
 
-// Componente Modal con TypeScript
+// Modal component with TypeScript
 const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
   const [successMessage, setSuccessMessage] = useState<string>('');
   const [isHovered, setHovered] = useState<boolean>(false);
 
-  // Limpiar los datos del formulario y los mensajes cuando se cierra el modal
+  // Clear form data and messages when the modal closes
   const handleModalClose = () => {
     setFormData({
       name: '',
@@ -51,9 +51,10 @@ const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
     });
     setFormError({});
     setSuccessMessage('');
-    handleClose();
+    handleClose();  // Call the close handler passed via props
   };
 
+  // Handle input changes in the form
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevFormData => ({
@@ -62,6 +63,7 @@ const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
     }));
   };
 
+  // Validate form data and return any errors
   const validateForm = (): FormError => {
     const { name, birthdate, city, email, phone } = formData;
     let errors: FormError = {};
@@ -84,23 +86,25 @@ const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
     return errors;
   };
 
+  // Check if the form is valid (no validation errors)
   const isFormValid = (): boolean => {
     return Object.keys(validateForm()).length === 0;
   };
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevenir el envío por defecto del formulario
+    e.preventDefault();  // Prevent the default form submission behavior
 
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
-      setFormError(errors); // Establecer errores
+      setFormError(errors);  // Set form validation errors
       setSuccessMessage('');
     } else {
       setSuccessMessage(t('Form submitted successfully!'));
       setFormError({});
       setTimeout(() => {
-        handleModalClose();
-      }, 2000); // Cerrar modal después de 2 segundos
+        handleModalClose();  // Close the modal after 2 seconds
+      }, 2000);
     }
   };
 
@@ -114,7 +118,7 @@ const Modal: React.FC<ModalProps> = ({ show, handleClose }) => {
     >
       <section
         className="modal-main"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}  // Prevent clicks inside the modal from closing it
       >
         <h2 id="modal-title">{t('User Form')}</h2>
         <p id="modal-description">{t('Please fill out the form below')}</p>

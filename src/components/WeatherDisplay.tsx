@@ -8,53 +8,53 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import '../styles/WeatherDisplay.css';
 
-// Define los tipos para los datos del clima
+// Define the types for weather data
 interface WeatherData {
   main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
+    temp: number;  // Current temperature
+    feels_like: number;  // Feels like temperature
+    temp_min: number;  // Minimum temperature
+    temp_max: number;  // Maximum temperature
+    pressure: number;  // Atmospheric pressure
+    humidity: number;  // Humidity percentage
   };
   wind: {
-    speed: number;
-    deg: number;
+    speed: number;  // Wind speed
+    deg: number;  // Wind direction in degrees
   };
   weather: {
-    description: string;
-    icon: string;
+    description: string;  // Weather description
+    icon: string;  // Weather icon code
   }[];
-  visibility: number;
+  visibility: number;  // Visibility in meters
   sys: {
-    sunrise: number;
-    sunset: number;
+    sunrise: number;  // Sunrise time in Unix timestamp
+    sunset: number;  // Sunset time in Unix timestamp
   };
   clouds: {
-    all: number;
+    all: number;  // Cloudiness percentage
   };
 }
 
-// Define las props del componente
+// Define the props for the WeatherDisplay component
 interface WeatherDisplayProps {
-  city: string;
-  language: string;
+  city: string;  // City for which weather is displayed
+  language: string;  // Language for weather descriptions
 }
 
 const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
   const { t } = useTranslation();
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null); // Estado para los datos del clima
-  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);  // State to store weather data
+  const [error, setError] = useState<string | null>(null);  // State to store error messages
 
-  // Animación de fade-in usando react-spring
+  // Fade-in animation using react-spring
   const fade = useSpring({ opacity: 1, from: { opacity: 0 }, config: { duration: 1000 } });
 
-  // Fetch de los datos del clima siempre que cambien la ciudad o el idioma
+  // Fetch weather data whenever city or language changes
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY; // Obtener la API key desde las variables de entorno
+        const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY;  // Get API key from environment variables
         if (!apiKey) {
           throw new Error("API key is missing");
         }
@@ -64,22 +64,24 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
         setError(null);
       } catch (error) {
         console.error('Error fetching weather data:', error);
-        setError('Error fetching weather data. Please try again later.');
+        setError('Error fetching weather data. Please try again later.');  // Set error message if fetching fails
       }
     };
 
     fetchWeather();
   }, [city, language]);
 
+  // Display error message if there's an error
   if (error) {
     return <div>{error}</div>;
   }
 
+  // Display loading message if weather data is not available yet
   if (!weatherData) {
     return <div>{t('Loading...')}</div>;
   }
 
-  // Desestructuración de los datos del clima para un fácil acceso
+  // Destructure weather data for easier access
   const {
     main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
     wind: { speed, deg },
@@ -89,28 +91,28 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
     clouds: { all: cloudiness },
   } = weatherData;
 
-  // Capitalizar la primera letra de una cadena
+  // Capitalize the first letter of a string
   const capitalizeFirstLetter = (string: string): string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  // Descripción del clima e icono
+  // Weather description and icon
   const weatherDescription = capitalizeFirstLetter(weather[0].description);
   const weatherIcon = `http://openweathermap.org/img/wn/${weather[0].icon}.png`;
 
-  // Componente para mostrar información detallada del clima
+  // Component to display detailed weather information
   const DetailCard: React.FC<{
-    icon: React.ElementType;
-    label: string;
-    value: string;
-    iconColor: string;
-    animationClass: string;
+    icon: React.ElementType;  // Icon component
+    label: string;  // Label for the detail
+    value: string;  // Value to display
+    iconColor: string;  // Color for the icon
+    animationClass: string;  // CSS class for animation
   }> = ({ icon: Icon, label, value, iconColor, animationClass }) => {
     return (
       <motion.div
         className="detailCard"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.1 }}  // Scale up on hover
+        whileTap={{ scale: 0.9 }}  // Scale down on tap
       >
         <motion.div
           className={animationClass}
@@ -124,7 +126,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
     );
   };
 
-  // Formatear la hora desde el timestamp
+  // Format the time from Unix timestamp
   const formatTime = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
