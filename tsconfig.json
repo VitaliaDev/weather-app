@@ -10,8 +10,10 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "baseUrl": "./src",
+    "types": ["vite/client"],
+    "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"]
     }

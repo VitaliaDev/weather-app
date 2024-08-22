@@ -11,77 +11,82 @@ import '../styles/WeatherDisplay.css';
 // Define the types for weather data
 interface WeatherData {
   main: {
-    temp: number;  // Current temperature
-    feels_like: number;  // Feels like temperature
-    temp_min: number;  // Minimum temperature
-    temp_max: number;  // Maximum temperature
-    pressure: number;  // Atmospheric pressure
-    humidity: number;  // Humidity percentage
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
   };
   wind: {
-    speed: number;  // Wind speed
-    deg: number;  // Wind direction in degrees
+    speed: number;
+    deg: number;
   };
   weather: {
-    description: string;  // Weather description
-    icon: string;  // Weather icon code
+    description: string;
+    icon: string;
   }[];
-  visibility: number;  // Visibility in meters
+  visibility: number;
   sys: {
-    sunrise: number;  // Sunrise time in Unix timestamp
-    sunset: number;  // Sunset time in Unix timestamp
+    sunrise: number;
+    sunset: number;
   };
   clouds: {
-    all: number;  // Cloudiness percentage
+    all: number;
   };
 }
 
 // Define the props for the WeatherDisplay component
 interface WeatherDisplayProps {
-  city: string;  // City for which weather is displayed
-  language: string;  // Language for weather descriptions
+  city: string;
+  language: string;
 }
 
 const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
   const { t } = useTranslation();
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);  // State to store weather data
-  const [error, setError] = useState<string | null>(null);  // State to store error messages
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fade-in animation using react-spring
   const fade = useSpring({ opacity: 1, from: { opacity: 0 }, config: { duration: 1000 } });
 
-  // Fetch weather data whenever city or language changes
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY;  // Get API key from environment variables
+        const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;  // Access environment variable
         if (!apiKey) {
           throw new Error("API key is missing");
         }
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=${language}`;
         const response = await axios.get<WeatherData>(url);
+
+        if (response.status !== 200) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
         setWeatherData(response.data);
         setError(null);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-        setError('Error fetching weather data. Please try again later.');  // Set error message if fetching fails
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error('Error fetching weather data:', error.message);
+          setError(`Error fetching weather data: ${error.message}`);
+        } else {
+          console.error('An unexpected error occurred:', error);
+          setError('An unexpected error occurred.');
+        }
       }
     };
 
     fetchWeather();
   }, [city, language]);
 
-  // Display error message if there's an error
   if (error) {
     return <div>{error}</div>;
   }
 
-  // Display loading message if weather data is not available yet
   if (!weatherData) {
     return <div>{t('Loading...')}</div>;
   }
 
-  // Destructure weather data for easier access
   const {
     main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
     wind: { speed, deg },
@@ -91,28 +96,25 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
     clouds: { all: cloudiness },
   } = weatherData;
 
-  // Capitalize the first letter of a string
   const capitalizeFirstLetter = (string: string): string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  // Weather description and icon
   const weatherDescription = capitalizeFirstLetter(weather[0].description);
   const weatherIcon = `http://openweathermap.org/img/wn/${weather[0].icon}.png`;
 
-  // Component to display detailed weather information
   const DetailCard: React.FC<{
-    icon: React.ElementType;  // Icon component
-    label: string;  // Label for the detail
-    value: string;  // Value to display
-    iconColor: string;  // Color for the icon
-    animationClass: string;  // CSS class for animation
+    icon: React.ElementType;
+    label: string;
+    value: string;
+    iconColor: string;
+    animationClass: string;
   }> = ({ icon: Icon, label, value, iconColor, animationClass }) => {
     return (
       <motion.div
         className="detailCard"
-        whileHover={{ scale: 1.1 }}  // Scale up on hover
-        whileTap={{ scale: 0.9 }}  // Scale down on tap
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
       >
         <motion.div
           className={animationClass}
@@ -126,7 +128,6 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, language }) => {
     );
   };
 
-  // Format the time from Unix timestamp
   const formatTime = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

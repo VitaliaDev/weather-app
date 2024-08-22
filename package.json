@@ -19,17 +19,18 @@
     "react-i18next": "^15.0.0",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.26.0",
-    "react-scripts": "^5.0.1",
     "react-spring": "^9.7.4",
     "recharts": "^2.12.7",
     "styled-components": "^6.1.12",
+    "vite": "^5.4.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -51,9 +52,11 @@
   },
   "devDependencies": {
     "@types/i18next": "^13.0.0",
+    "@types/node": "^22.5.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-i18next": "^8.1.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",

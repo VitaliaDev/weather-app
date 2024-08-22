@@ -3,6 +3,7 @@
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
     "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
       "import/extensions": [
         "error",
@@ -10,6 +11,18 @@
         {
           "ts": "never",
           "tsx": "never"
+        }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "**/vite.config.js",
+            "**/rollup.config.js",
+            "**/gulpfile.js",
+            "**/tests/**/*.ts",
+            "**/tests/**/*.tsx"
+          ]
         }
       ]
     },
