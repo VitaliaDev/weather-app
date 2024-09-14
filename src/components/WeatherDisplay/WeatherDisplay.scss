@@ -1,0 +1,288 @@
+@import '../../assets/styles/utils/variables'; // Ensure this path is correct
+
+/* Container for the weather display */
+.container {
+  position: relative;
+  padding: $padding-10;
+  max-width: 1000px; // Increased max-width for a spacious feel
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Main weather card */
+.mainCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $mainCard-bg-color;
+  background-image: url('src/assets/img/city.png');
+  background-size: 50%; // Ensure the image covers the whole card
+  background-repeat: repeat-x; 
+  background-position: center; // Center the image
+  padding: $mainCard-padding;
+  margin: $padding-10;
+  border-radius: $mainCard-border-radius;
+  box-shadow: $box-shadow-medium; // Softer shadow for a modern look
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* Title for the weather display */
+.title {
+  font-size: 2.5rem; // Responsive font size
+  font-weight: 700;
+  font-family: $roboto-font;
+  color: $primary-color;
+  margin: 20px 0;
+  text-transform: uppercase; // Modern text styling
+}
+
+/* Temperature display */
+.temp {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0 20px 0 0;
+  color: azure;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); // Subtle text shadow for depth
+}
+
+/* Main card information */
+.mainCardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.908); // White background with 70% opacity
+  padding: 10px; // Add padding for better readability
+  border-radius: 5px; // Optional: Add rounded corners
+}
+
+/* Weather details container */
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: $roboto-font;
+  margin-top: 20px; // Added margin-top for spacing from the main card
+}
+
+/* Weather description text */
+.textDescription {
+  margin: 0;
+  font-size: 1.5rem;
+  color: $primary-color;
+  font-weight: 700;
+}
+
+.textDescriptionS {
+  margin: 0;
+  font-size: 1rem;
+  color: $primary-color;
+  font-weight: 700;
+}
+
+/* General text style */
+.text {
+  margin: 0;
+  font-size: $text-font-size;
+  color: $primary-color;
+  font-family: $roboto-font;
+}
+
+/* Detail card icon */
+.detailIcon {
+  font-size: 2rem; // Reduced font size for smaller detail cards
+  margin-bottom: 5px; // Reduced margin for compact design
+}
+
+/* Detail card text */
+.detailText {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.875rem; // Slightly smaller text size
+  color: $primary-color;
+}
+
+/* Detail card container */
+.detailCard {
+  margin: 5px; // Reduced margin for tighter spacing
+  flex: 1 0 8%; // Allow more cards per row
+  height: $forecast-card-height; // Reduced height for smaller detail cards
+  padding: 10px;
+  background-color: $mainCard-bg-color;
+  border-radius: $mainCard-border-radius;
+  box-shadow: $box-shadow-light; // Lighter shadow for a soft effect
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Cloud icon styles */
+.cloudIcon {
+  font-size: 500px; // Reduced size for a more subtle background
+  color: rgba(255, 255, 255, 0.1); // Lighter color for a modern feel
+  position: absolute;
+  top: 15%;
+  left: -15%;
+  z-index: 0;
+}
+
+.cloudIcon2 {
+  font-size: 300px; // Reduced size for balance
+  color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 65%;
+  right: -15%;
+  z-index: 0;
+}
+
+/* Cloud background */
+.cloudBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Forecast container */
+.forecast {
+  margin-top: 20px; // Margin to separate from details
+
+  h3 {
+    font-size: 2.5rem; // Responsive font size
+    font-weight: 700;
+    font-family: $roboto-font;
+    color: $primary-color;
+    margin: 20px 0;
+    text-transform: uppercase;
+  }
+}
+
+.forecastCards {
+  margin: 5px; // Reduced margin for tighter spacing
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Forecast card styles */
+.forecastCard {
+  background-color: $mainCard-bg-color;
+  border-radius: $mainCard-border-radius;
+  box-shadow: $box-shadow-light; // Lighter shadow for a soft effect
+  padding: 10px;
+  width: $forecast-card-width; // Fixed width for consistency
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .forecastTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 10px;
+  }
+
+  .img {
+    width: 50px; // Adjust icon size
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .temp {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+
+  .textDescription {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.875rem; // Slightly smaller text size
+    color: $primary-color;
+  }
+}
+
+/* Animations */
+.rotateIcon {
+  animation: rotate 20s linear infinite; // Slower rotation for subtlety
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.moveUpDownIcon {
+  animation: moveUpDown 3s ease-in-out infinite; // Slower movement for smoothness
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15px); // Increased movement for visibility
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.vibrateIcon {
+  animation: vibrate 2s ease-in-out infinite;
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.fadeInOutIcon {
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5; // More pronounced fade
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

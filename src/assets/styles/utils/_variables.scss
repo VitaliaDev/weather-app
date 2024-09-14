@@ -1,0 +1,90 @@
+// _variables.scss
+
+// Colors
+$primary-color: #294691;
+$secondary-color: #FFB74D;
+$background-gradient: linear-gradient(135deg, #4c79ff, #b1dcfb);
+$background-color: rgba(255, 255, 255, 0.9);
+$text-color: #333;
+$success-color: #21bd45;
+$disabled-color: #7b8cca;
+$error-color: #913029;
+
+$mainCard-bg-color: rgba(255, 255, 255, 0.419);
+$modal-main-bg-color: white;
+$modal-bg-color: rgba(0, 0, 0, 0.5);
+$sidebar-bg-color: rgba(255, 255, 255, 0.419);
+
+// Fonts
+$base-font-family: 'Inter', sans-serif;
+$roboto-font: 'Inter', sans-serif;
+$text-font-size: 16px; 
+
+
+// Shadows
+$box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+$box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.2);
+$slider-width: 60px;
+$slider-height: 34px;
+$slider-icon-size: 26px; 
+$slider-icon-translate-x: 30px; 
+$slider-icon-translate-y: 45px; 
+
+// Sizes
+// Border Radius
+$mainCard-border-radius: 15px;
+// Padding
+$padding-4: 4px; 
+$padding-5: 5px;
+$padding-10: 10px;
+$padding-15: 15px;
+$padding-20: 20px;
+$sliderpadding: 26px;
+// Modal
+$modal-padding: 20px;
+$modal-width: 90%;
+$modal-max-width: 600px;
+$modal-border-radius: 15px;
+$modal-backdrop-blur: 8px;
+
+// Main Card
+$mainCard-padding: 30px;
+$mainCard-border-radius: 15px;
+$mainCard-img-size: 70px;
+// Forecast Card
+$forecast-card-width: 170px; 
+$forecast-card-height: 100px; 
+// Slider
+$slider-width: 60px;
+$slider-height: 34px;
+
+// Sidebar
+$sidebar-width: 200px;
+$sidebar-minimized-width: 60px;
+$sidebar-padding: 20px;
+$sidebar-minimized-padding: 10px;
+
+// Buttons
+$minimize-button-size: 35px;
+$button-padding: 15px;
+$button-border-radius: 8px;
+$button-font-size: 16px;
+
+// Form
+$form-gap: 20px;
+$form-padding: 25px;
+$form-border-radius: 15px;
+
+// Input Fields
+$input-padding: 15px;
+$input-border-radius: 8px;
+$input-font-size: 16px;
+$input-background-color: #f9f9f9;
+$input-border-color: #ddd;
+
+// Miscellaneous
+$minimize-button-size: 35px;
+
+// Breakpoints
+$mobile-max-width: 600px; 

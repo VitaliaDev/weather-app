@@ -1,0 +1,42 @@
+@import '../../assets/styles/utils/variables';
+
+
+.slider-container {
+    position: absolute;
+    top: $padding-10;;
+    right: $padding-10;;
+  }
+  
+  .slider-switch {
+    display: flex;
+    align-items: center;
+  }
+  
+  .slider {
+    position: relative;
+    display: inline-block;
+    width: $slider-width;
+    height: $slider-height;
+    background-color: $primary-color;
+    transition: background-color 0.4s;
+    border-radius: $slider-height;
+    cursor: pointer;
+  
+    .slider-icon {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 26px;
+      height: 26px;
+      background-size: cover;
+      border-radius: 50%;
+      transition: transform 0.4s;
+      background-image: url('../assets/icons/uk_flag.webp'); 
+    }
+  
+    &.checked .slider-icon {
+      transform: translateX(26px);
+      background-image: url('../assets/icons/es_flag.png'); 
+    }
+  }
+  

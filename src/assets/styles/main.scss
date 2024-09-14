@@ -1,0 +1,17 @@
+@import 'utils/variables';
+@import 'base/reset';
+@import 'base/global';
+
+@import '../../components/WeatherDisplay/WeatherDisplay.scss';
+@import '../../components/LanguageToggle/LanguageToggle.scss'; // Fixed typo
+@import '../../components/Modal/Modal.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+@media (max-width: 768px) {
+  .App {
+    flex-direction: column;
+    .Sidebar {
+      width: 100%; 
+    }
+  }
+}

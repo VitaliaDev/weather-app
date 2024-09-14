@@ -1,12 +1,12 @@
 // src/App.tsx
 import React, { useState } from 'react';
-import i18n from './i18n'; // Ensure the correct relative path
-import './styles/App.css';
-import Sidebar from './components/Sidebar';
-import WeatherDisplay from './components/WeatherDisplay';
-import LanguageToggle from './components/LanguageToggle';
-import Modal from './components/Modal';
-import { Language } from './types/language'; // Import the Language type
+import i18n from './i18n'; 
+import '../src/assets/styles/main.scss'; 
+import Sidebar from './components/Sidebar/Sidebar';
+import WeatherDisplay from './components/WeatherDisplay/WeatherDisplay';
+import LanguageToggle from './components/LanguageToggle/LanguageToggle';
+import Modal from './components/Modal/Modal';
+import { Language } from './types/language'; 
 
 const App: React.FC = () => {
   // State to manage the current language
@@ -49,7 +49,7 @@ const App: React.FC = () => {
       />
       {/* Main content area where weather information is displayed */}
       <div className="main-content">
-        <WeatherDisplay city={city} language={language} />
+        <WeatherDisplay city={city} language={language} apiKey={''} />
       </div>
       {/* Modal component for displaying the contact form */}
       <Modal show={showContactForm} handleClose={toggleContactForm} />

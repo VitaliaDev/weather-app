@@ -52,7 +52,16 @@ i18n
           'Phone number must be 9 digits and contain only numbers': 'Phone number must be 9 digits and contain only numbers',
           'Form submitted successfully!': 'Form submitted successfully!',
           "Please fill out the form below": "Please fill out the form below",
-          "Loading...": "Loading..."
+          "Loading...": "Loading...",
+          "Monday": "Monday",
+          "Tuesday": "Tuesday",
+          "Wednesday": "Wednesday",
+          "Thursday": "Thursday",
+          "Friday": "Friday",
+          "Saturday": "Saturday",
+          "Sunday": "Sunday",
+          "Forecast": "Forecast",
+
         }
       },
       es: {
@@ -62,7 +71,7 @@ i18n
           "London": "Londres",
           "Toronto": "Toronto",
           "Singapore": "Singapur",
-          "Weather in": "El clima en",
+          "Weather in": "Clima en",
           "Humidity": "Humedad",
           "Wind Speed": "Velocidad del Viento",
           "Wind Direction": "Dirección del Viento",
@@ -79,15 +88,16 @@ i18n
           "m/s": "m/s",
           "%": "%",
           "hPa": "hPa",
-          'Enter your name': 'Ingresa tu nombre',
-          'Enter your email': 'Ingresa tu correo electrónico',
-          'Enter your message': 'Ingresa tu mensaje',
+          'Enter your name': 'Nombre',
+          'Enter your email': 'Correo electrónico',
+          'Enter your message': 'Mensaje',
           'Name': 'Nombre',
           'Birthdate': 'Fecha de nacimiento',
           'City': 'Ciudad',
           'Email': 'Correo electrónico',
           'Phone': 'Teléfono',
-          'Enter your phone number': 'Ingresa tu número de teléfono',
+          'Enter your city': 'Ciudad',
+          'Enter your phone number': 'Número de teléfono',
           'Submit': 'Enviar',
           'Name is required': 'Nombre es requerido',
           'Name cannot contain numbers': 'El nombre no puede contener números',
@@ -101,14 +111,22 @@ i18n
           'Phone number must be 9 digits and contain only numbers': 'El número de teléfono debe tener 9 dígitos y contener solo números',
           'Please fill out the form below': 'Por favor, complete el formulario a continuación',
           'Form submitted successfully!': '¡Formulario enviado con éxito!',
-          'Loading...': 'Cargando...'
+          'Loading...': 'Cargando...',
+          "Monday": "Lunes",
+          "Tuesday": "Martes",
+          "Wednesday": "Miércoles",
+          "Thursday": "Jueves",
+          "Friday": "Viernes",
+          "Saturday": "Sábado",
+          "Sunday": "Domingo",
+          "Forecast": "Pronóstico"
         }
       }
     },
     lng: "en", // Default language
     fallbackLng: "en", // Fallback language
     interpolation: {
-      escapeValue: false // React already escapes values to prevent XSS attacks
+      escapeValue: false 
     }
   });
 

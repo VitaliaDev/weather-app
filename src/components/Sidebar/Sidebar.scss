@@ -1,0 +1,119 @@
+@import '../../assets/styles/utils/variables';
+
+// Sidebar
+.sidebar {
+  flex: 0 0 250px;
+  width: $sidebar-width;
+  padding: $sidebar-padding;
+  background-color: $sidebar-bg-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: $box-shadow;
+  transition: width 0.2s ease, padding 0.4s ease;
+  z-index: 1000;
+  font-family: $roboto-font;
+
+  &.minimized {
+    width: $sidebar-minimized-width;
+    padding: $sidebar-minimized-padding;
+
+    .sidebar-content {
+      display: none;
+    }
+  }
+
+  .minimize-button {
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    background: $primary-color;
+    border: none;
+    border-radius: 50%;
+    width: $minimize-button-size;
+    height: $minimize-button-size;
+    cursor: pointer;
+    box-shadow: $box-shadow;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    font-weight: bolder;
+
+    .icon {
+      flex-shrink: 0;
+      margin-right: 10px;
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .sidebar-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: $primary-color;
+
+    .arrow-icon {
+      margin-top: 5px;
+    }
+  }
+
+  .icons {
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+    .icon-minimized {
+      width: 30px;
+      height: 30px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+// City List
+.city-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: $primary-color;
+}
+
+.city-item {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 15px;
+
+  &:hover {
+    background-color: $primary-color;
+    color: aliceblue;
+  }
+
+  &.selected {
+    background-color: $primary-color;
+    color: aliceblue;
+    font-weight: bold;
+  }
+}
+
+// User Form
+.userform {
+  margin-top: 10px;
+}

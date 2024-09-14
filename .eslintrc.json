@@ -1,9 +1,26 @@
 {
-    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended"],
+    "extends": ["airbnb", "airbnb/hooks", "plugin:@typescript-eslint/recommended",   "plugin:babel/recommended","plugin:jest/recommended",
+    "plugin:jest/style"],
+    "env": {
+      "browser": true,
+      "node": true,
+      "jest": true
+    },
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint",  "jest","babel"],
+    
     "rules": {
         "@typescript-eslint/no-non-null-assertion": "off",
+        "jest/consistent-test-it": ["error", { "fn": "it" }],
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
       "import/extensions": [
         "error",
