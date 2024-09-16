@@ -13,6 +13,9 @@ In the latest commit, the following changes and enhancements were implemented:
 - **Vite Integration:**  
   Vite was integrated as the build tool for faster development and improved performance. Vite provides an optimized development experience with instant server start and hot module replacement (HMR).
 
+- **TypeScript Integration:**  
+TypeScript was introduced to add static type checking, improving code reliability and developer productivity. It enhances the development process by catching errors early and offering better tooling support, such as autocomplete and refactoring capabilities.
+
 - **SASS Integration:**  
   SASS (Syntactically Awesome Style Sheets) was integrated into the project to improve the maintainability and scalability of the application's styles. This allows for better management of variables, mixins, and reusable styles.
   
@@ -51,6 +54,9 @@ In the latest commit, the following changes and enhancements were implemented:
 
 ## Installation
 
+## Prerequisites
+- Node.js v14+ 
+
 To get started with this project locally, follow these steps:
 
 1. **Clone the Repository**
@@ -69,9 +75,10 @@ To get started with this project locally, follow these steps:
 
 The application will be available at http://localhost:3000.
 
-!!IMPORTANT NOTE
-+ .env is commented to not diclose a sensitive information such as API Key, to use the APP copypaste an API Key from
-+ https://home.openweathermap.org/
+## API Key Setup
+Create a `.env` file in the root directory and add your API key:
+VITE_OPENWEATHER_API_KEY=your_api_key_here
+
 
 ## Usage
   Changing City: Use the sidebar to enter and select a city to view its weather forecast.
